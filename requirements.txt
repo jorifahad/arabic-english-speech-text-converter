@@ -2,6 +2,6 @@ streamlit>=1.40,<2
 openai-whisper>=20231117
 gTTS>=2.5,<3
 torch
-surya-ocr
+surya-ocr==0.14.6
 Pillow>=10
 numpy<2

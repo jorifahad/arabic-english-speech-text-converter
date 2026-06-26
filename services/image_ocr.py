@@ -1,93 +1,90 @@
 from __future__ import annotations
 
-import os
 from typing import Any
 
-# تعطيل oneDNN وPIR لأنهما سببا الخطأ السابق على Streamlit.
-os.environ["FLAGS_use_mkldnn"] = "0"
-os.environ["FLAGS_enable_pir_api"] = "0"
-
-import numpy as np
 import streamlit as st
 from PIL import Image
-from paddleocr import PaddleOCR
+from surya.detection import DetectionPredictor
+from surya.recognition import RecognitionPredictor
 
 
+# Keep the same values expected by app.py and gTTS.
+# Surya itself detects the script automatically, so language_code is accepted
+# for interface compatibility but is not passed to the model.
 OCR_LANGUAGE_OPTIONS = {
     "Arabic": "ar",
     "English": "en",
 }
 
 
-@st.cache_resource(show_spinner="Loading PaddleOCR model...")
-def load_ocr_model(language_code: str):
-    return PaddleOCR(
-        lang=language_code,
-        use_doc_orientation_classify=False,
-        use_doc_unwarping=False,
-        use_textline_orientation=True,
-    )
+@st.cache_resource(show_spinner="Loading Surya OCR models...")
+def load_ocr_models() -> tuple[RecognitionPredictor, DetectionPredictor]:
+    """Load the Surya v1 OCR models once for all Streamlit reruns."""
+    recognition_predictor = RecognitionPredictor()
+    detection_predictor = DetectionPredictor()
+    return recognition_predictor, detection_predictor
 
 
-def collect_text(value: Any) -> list[str]:
-    texts: list[str] = []
-
+def _read_text(value: Any) -> str:
+    """Extract recognized text safely from Surya result objects or dictionaries."""
     if value is None:
-        return texts
+        return ""
 
     if isinstance(value, str):
-        cleaned = " ".join(value.split())
-
-        if cleaned:
-            texts.append(cleaned)
-
-        return texts
+        return " ".join(value.split()).strip()
 
     if isinstance(value, dict):
-        for key in ("rec_texts", "texts", "text"):
-            if key in value:
-                texts.extend(collect_text(value[key]))
+        for key in ("text", "html"):
+            text = _read_text(value.get(key))
+            if text:
+                return text
+        return ""
 
-        if texts:
-            return texts
+    text = getattr(value, "text", None)
+    if text:
+        return " ".join(str(text).split()).strip()
 
-        for nested_value in value.values():
-            texts.extend(collect_text(nested_value))
+    html = getattr(value, "html", None)
+    if html:
+        return " ".join(str(html).split()).strip()
 
-        return texts
-
-    if isinstance(value, (list, tuple)):
-        for item in value:
-            texts.extend(collect_text(item))
-
-        return texts
-
-    if hasattr(value, "json"):
-        json_value = value.json() if callable(value.json) else value.json
-        texts.extend(collect_text(json_value))
-        return texts
-
-    if hasattr(value, "to_dict"):
-        texts.extend(collect_text(value.to_dict()))
-        return texts
-
-    return texts
+    return ""
 
 
 def extract_text_from_image(
     image: Image.Image,
     language_code: str,
 ) -> str:
-    model = load_ocr_model(language_code)
-    image_array = np.asarray(image.convert("RGB"))
+    """Extract Arabic or English text from a PIL image using Surya OCR 0.14.6."""
+    del language_code  # Surya is multilingual and detects the script automatically.
 
-    result = model.predict(image_array)
-    lines = collect_text(result)
+    if image is None:
+        return ""
 
-    unique_lines: list[str] = []
+    recognition_predictor, detection_predictor = load_ocr_models()
+    rgb_image = image.convert("RGB")
 
-    for line in lines:
-        if line and (not unique_lines or unique_lines[-1] != line):
-            unique_lines.append(line)
+    # Surya v1 expects one language-list per image. Arabic and English are both
+    # supplied because the app supports bilingual and mixed documents.
+    predictions = recognition_predictor(
+        [rgb_image],
+        [["ar", "en"]],
+        detection_predictor,
+    )
 
-    return "\n".join(unique_lines).strip()
+    if not predictions:
+        return ""
+
+    page_result = predictions[0]
+    text_lines = getattr(page_result, "text_lines", None)
+
+    if text_lines is None and isinstance(page_result, dict):
+        text_lines = page_result.get("text_lines", [])
+
+    lines: list[str] = []
+    for line in text_lines or []:
+        text = _read_text(line)
+        if text and (not lines or lines[-1] != text):
+            lines.append(text)
+
+    return "\n".join(lines).strip()

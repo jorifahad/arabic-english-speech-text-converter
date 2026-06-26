@@ -227,7 +227,7 @@ with image_tab:
             if image is None:
                 st.warning("Upload an image first.")
             else:
-                with st.spinner("Reading text from the image with PaddleOCR..."):
+                with st.spinner("Reading text from the image with Surya OCR..."):
                     try:
                         extracted_text = extract_text_from_image(
                             image=image,
@@ -307,14 +307,14 @@ with about_tab:
         - **Speech to Text:** Upload or record audio and convert it into editable text.
         - **Text to Speech:** Turn written content into downloadable MP3 audio.
         - **Image to Speech:** Extract Arabic or English text from an image using
-          PaddleOCR, review it, and convert it into speech.
+          Surya OCR, review it, and convert it into speech.
         - **Model Control:** Choose between Tiny, Base, and Small Whisper models.
         - **Practical Outputs:** Edit, listen to, and download results directly
           from the browser.
 
         ### Technologies
 
-        `Python` · `Streamlit` · `OpenAI Whisper` · `PaddleOCR` · `gTTS` · `FFmpeg`
+        `Python` · `Streamlit` · `OpenAI Whisper` · `Surya OCR` · `gTTS` · `FFmpeg`
         """
     )
 
