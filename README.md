@@ -1,32 +1,44 @@
-# [ARCHIVED]: Multi-lingual Transcription using Whisper
+# SawtAI — Arabic and English Speech & Text Converter
 
-This is a simple web application that allows users to transcribe audio files into text using the [Whisper Automatic Speech Recognition (ASR) model](https://github.com/openai/whisper). The application is built using Streamlit and leverages OpenAI's Whisper to perform transcriptions.
+SawtAI is a bilingual Streamlit application that converts spoken Arabic or English into editable text and turns written content back into downloadable speech.
 
-## How to Use
+## Features
 
-* **Upload Audio**: Click on the button and select (or drag and drop) an audio file in WAV, MP3, or M4A format that you want to transcribe.
-  ![alt text](https://github.com/fizamusthafa/whisper-app/blob/master/overview.png "Drag or Upload")
-* **Transcribe Audio**: Once the audio file is uploaded, click on the "Transcribe Audio" button in the sidebar. The application will start transcribing the audio using the Whisper model.
-* **Supported Languages**: The Whisper model supports multiple languages. The application will automatically detect the language of the uploaded audio and provide accurate transcriptions for a wide range of languages. This includes *Afrikaans, Arabic, Armenian, Azerbaijani, Belarusian, Bosnian, Bulgarian, Catalan, Chinese, Croatian, Czech, Danish, Dutch, English, Estonian, Finnish, French, Galician, German, Greek, Hebrew, Hindi, Hungarian, Icelandic, Indonesian, Italian, Japanese, Kannada, Kazakh, Korean, Latvian, Lithuanian, Macedonian, Malay, Marathi, Maori, Nepali, Norwegian, Persian, Polish, Portuguese, Romanian, Russian, Serbian, Slovak, Slovenian, Spanish, Swahili, Swedish, Tagalog, Tamil, Thai, Turkish, Ukrainian, Urdu, Vietnamese, and Welsh.*
-* **Clean-up**: After the transcription is complete, the temporary audio file will be removed to ensure your data privacy.
+- Upload WAV, MP3, M4A, MP4, MPEG, and MPGA files.
+- Record audio directly from the browser.
+- Automatic language detection with optional Arabic or English selection.
+- Whisper model selection: Tiny, Base, or Small.
+- Editable transcription with detected language and word count.
+- Download transcription as TXT.
+- Arabic and English text-to-speech.
+- Audio playback and MP3 download.
+- Responsive dark interface designed for portfolio presentation.
 
-## Requirements
+## Technologies
 
-To run this application locally, you need to have Python installed along with the following packages:
+- Python
+- Streamlit
+- OpenAI Whisper
+- gTTS
+- FFmpeg
 
-* Streamlit
-* Whisper
+## Run Locally
 
-You can install the required packages using the following commands:
+1. Install FFmpeg.
+2. Install the Python dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
-pip install streamlit
-pip install openai-whisper
+
+3. Start the application:
+
+```bash
+streamlit run whisper-app.py
 ```
 
-## How to Run
+Whisper downloads the selected model the first time it is used. Text-to-speech generation through gTTS requires an internet connection.
 
-* Clone this repository to your local machine.
-* Open a terminal or command prompt and navigate to the repository's directory.
-* Run the Streamlit application: `streamlit run whisper-app.py`
-* The application will open in your web browser, and you can start transcribing audio files right away.
+## Project Origin
 
+This project was developed from an archived multilingual Whisper transcription application and substantially expanded with a redesigned interface, browser recording, language and model controls, editable downloads, and Arabic-English text-to-speech.
