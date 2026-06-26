@@ -2,7 +2,7 @@ streamlit>=1.40,<2
 openai-whisper>=20231117
 gTTS>=2.5,<3
 torch
-paddlepaddle==2.6.2
-paddleocr==2.7.0.3
+paddlepaddle==3.3.0
+paddleocr>=3.0.0
 Pillow>=10
 numpy<2
