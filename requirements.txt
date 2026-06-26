@@ -1,7 +1,8 @@
-streamlit>=1.40,<2
-openai-whisper>=20231117
-gTTS>=2.5,<3
-torch
+streamlit==1.40.2
+openai-whisper==20231117
+gTTS==2.5.4
+torch==2.7.1
 surya-ocr==0.14.6
-Pillow>=10
-numpy<2
+transformers==4.51.3
+Pillow==10.4.0
+numpy==1.26.4
