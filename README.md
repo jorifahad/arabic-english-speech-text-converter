@@ -10,19 +10,19 @@ SawtAI is a bilingual web application that converts Arabic and English content b
 
 ### Speech to Text
 
-Upload or record Arabic and English audio, convert it into editable text using OpenAI Whisper, and download the transcription.
+Upload or record Arabic and English audio, convert it into editable text using OpenAI Whisper, then review and download the result.
 
 ![Speech to Text](speech.png)
 
 ### Text to Speech
 
-Convert Arabic or English text into audio, choose the speaking speed, listen to the result, and download it as an MP3 file.
+Enter Arabic or English text, generate audio using gTTS, listen to it directly, and download the generated MP3 file.
 
-[Text to Speech](text.png)
+![Text to Speech](text.png)
 
 ### Image to Speech
 
-Extract Arabic and English text from images using EasyOCR, review or edit the result, and convert the extracted text into speech.
+Upload an image, extract Arabic or English text using EasyOCR, correct the reading order, edit the result, and convert it into speech.
 
 ![Image to Speech](Image.png)
 
@@ -31,7 +31,6 @@ Extract Arabic and English text from images using EasyOCR, review or edit the re
 
 **Audio:** WAV, MP3, M4A, MP4, MPEG, MPGA  
 **Images:** PNG, JPG, JPEG, WEBP
-
 
 ## Use Cases
 
