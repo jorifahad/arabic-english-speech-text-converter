@@ -1,0 +1,21 @@
+UPLOAD OR REPLACE THESE FILES IN GITHUB
+
+Replace:
+- app.py
+- requirements.txt
+- README.md
+
+Add:
+- services/image_ocr.py
+
+Keep the existing files:
+- services/speech_to_text.py
+- services/text_to_speech.py
+- services/__init__.py
+- ui/styles.py
+- ui/__init__.py
+- packages.txt
+- .streamlit/config.toml
+
+After committing, Streamlit should redeploy automatically.
+The first PaddleOCR run can take longer while the Arabic or English model downloads.
