@@ -2,7 +2,8 @@ streamlit==1.40.2
 openai-whisper==20250625
 gTTS==2.5.4
 torch==2.7.1
-surya-ocr==0.14.6
-transformers==4.51.3
+torchvision==0.22.1
+easyocr==1.7.2
 Pillow==10.4.0
 numpy==1.26.4
+opencv-python-headless==4.10.0.84
