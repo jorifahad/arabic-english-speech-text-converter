@@ -1,8 +1,10 @@
-streamlit>=1.40.0
+--extra-index-url https://www.paddlepaddle.org.cn/packages/stable/cpu/
+
+streamlit>=1.40,<2
 openai-whisper>=20231117
-gTTS>=2.5.4
+gTTS>=2.5,<3
 torch
-paddleocr>=3.0.0
-paddlepaddle>=3.0.0
-Pillow>=10.0.0
-numpy>=1.24.0
+paddlepaddle==3.3.0
+paddleocr
+Pillow>=10
+numpy<2
