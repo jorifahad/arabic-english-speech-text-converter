@@ -1,5 +1,5 @@
 streamlit==1.40.2
-openai-whisper==20231117
+openai-whisper==20250625
 gTTS==2.5.4
 torch==2.7.1
 surya-ocr==0.14.6
