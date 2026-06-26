@@ -1,4 +1,0 @@
-streamlit>=1.40.0
-openai-whisper>=20231117
-gTTS>=2.5.4
-torch
