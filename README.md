@@ -1,75 +1,42 @@
-# SawtAI — Arabic & English Speech, Text, and Image Converter
+# SawtAI — Arabic & English Content Converter
 
-SawtAI is a bilingual accessibility and content-conversion web application built from scratch at the application level. It integrates pre-trained models and libraries for speech recognition, text-to-speech, and optical character recognition.
+SawtAI is a bilingual web application that converts Arabic and English content between speech, text, images, and audio through a simple Streamlit interface.
+
+## Interface
+
+![SawtAI Interface](interface.png)
 
 ## Features
 
 ### Speech to Text
-- Upload an audio file or record directly from the browser.
-- Convert Arabic and English speech into editable text.
-- Automatic language detection or manual language selection.
-- Choose between Whisper Tiny, Base, and Small.
-- Download the transcription as TXT.
+
+Upload or record Arabic and English audio, convert it into editable text using OpenAI Whisper, and download the transcription.
+
+![Speech to Text](speech.png)
 
 ### Text to Speech
-- Convert Arabic or English text into speech.
-- Listen to the generated audio in the browser.
-- Download the result as MP3.
-- Optional slower speaking speed.
+
+Convert Arabic or English text into audio, choose the speaking speed, listen to the result, and download it as an MP3 file.
+
+[Watch the Text to Speech demo](txt.mp4)
 
 ### Image to Speech
-- Upload PNG, JPG, JPEG, or WEBP images.
-- Extract Arabic or English text using PaddleOCR.
-- Review and edit the extracted text.
-- Download the extracted text as TXT.
-- Convert the extracted text into speech.
-- Download the generated image narration as MP3.
 
-## Technologies
+Extract Arabic and English text from images using EasyOCR, review or edit the result, and convert the extracted text into speech.
 
-- Python
-- Streamlit
-- OpenAI Whisper
-- PaddleOCR
-- gTTS
-- FFmpeg
+![Image to Speech](Image.png)
 
-## Project Structure
 
-```text
-├── app.py
-├── requirements.txt
-├── packages.txt
-├── README.md
-├── services/
-│   ├── __init__.py
-│   ├── speech_to_text.py
-│   ├── text_to_speech.py
-│   └── image_ocr.py
-├── ui/
-│   ├── __init__.py
-│   └── styles.py
-└── .streamlit/
-    └── config.toml
-```
+## Supported Files
 
-## Run Locally
+**Audio:** WAV, MP3, M4A, MP4, MPEG, MPGA  
+**Images:** PNG, JPG, JPEG, WEBP
 
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
 
-FFmpeg must also be installed on the system.
+## Use Cases
 
-## Deployment
+- Transcribing Arabic and English recordings.
+- Converting written content into audio.
+- Extracting text from screenshots and scanned images.
+- Supporting users who prefer listening to written content.
 
-For Streamlit Community Cloud:
-
-- Main file path: `app.py`
-- Keep `packages.txt` in the repository root.
-- The first OCR run may take longer because PaddleOCR downloads its pre-trained recognition models.
-
-## Model Note
-
-The application code and interface are independently developed. Whisper and PaddleOCR are pre-trained models, while gTTS provides speech synthesis.
