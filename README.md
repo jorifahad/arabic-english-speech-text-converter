@@ -18,7 +18,7 @@ Upload or record Arabic and English audio, convert it into editable text using O
 
 Convert Arabic or English text into audio, choose the speaking speed, listen to the result, and download it as an MP3 file.
 
-[Watch the Text to Speech demo](txt.mp4)
+[Watch the Text to Speech demo](text.png)
 
 ### Image to Speech
 
